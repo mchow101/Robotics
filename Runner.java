@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,14 +24,19 @@ public class Runner {
 	static JPanel robotPanel = new JPanel();
 	static JTextPane stats = new JTextPane();
 	static JTextPane action = new JTextPane();
-	static Robot m = (new Robot((int) (Math.random() * 10) + 10, (int) (Math.random() * 10) + 10, true, true));
+	static ArrayList<Robot> robots = new ArrayList<Robot>();
 	static Font f = new Font(Font.SANS_SERIF, 3, 75);
 	static Font z = new Font(Font.SANS_SERIF, 3, 15);
 	static Font p = new Font(Font.SANS_SERIF, 3, 20);
-	static int[] lollipop = new int[8];
+	static Robot m;
 
 	public static void main(String args[]) {
 
+		for(int i = 0; i < 6; i++) {
+			robots.add((new Robot("Robot" + (i + 1), (int) (Math.random() * 10) + 10, (int) 
+					(Math.random() * 10) + 10, true, true)));
+		}
+		m = robots.get(0);
 		window.setLayout(null);
 		window.setVisible(true);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,10 +50,6 @@ public class Runner {
 		robotPanel.setSize(width, height - ((height / 4) * 3));
 		robotPanel.setLocation(0, 600);
 
-		stats.setSize(width / 4, height / 4);
-		stats.setFont(p);
-		stats.setText(m.returnStats());
-
 		action.setSize((width - (width / 4) - 5), height / 4);
 		action.setLocation((width / 4) + 5, 0);
 
@@ -59,9 +61,8 @@ public class Runner {
 		for (int i = 0; i < 8; i++) {
 			actionButtons[i] = new JButton("" + (i + 1));
 			buttonPanel.add(actionButtons[i]);
-			actionButtons[i].addActionListener(new playListener());
+			actionButtons[i].addActionListener(new playListener(i + 1));
 			actionButtons[i].setFont(z);
-			lollipop[i] = i + 1;
 			switch (i) {
 			case 0:
 				actionButtons[i].setText("Place Cube onto Switch");
@@ -92,9 +93,9 @@ public class Runner {
 		}
 
 		for (int i = 0; i < 6; i++) {
-			robotButtons[i] = new JButton("Robot" + (i + 1));
+			robotButtons[i] = new JButton(robots.get(i).getName());
 			robotPanel.add(robotButtons[i]);
-			robotButtons[i].addActionListener(new playListener());
+			robotButtons[i].addActionListener(new robotListener(i));
 			robotButtons[i].setFont(z);
 
 			if (i < 3) {
@@ -119,12 +120,15 @@ public class Runner {
 }
 
 class playListener implements ActionListener {
+	private int i;
+	public playListener(int i) {
+		this.i = i;
+	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-
-		System.out.println(Runner.lollipop);
 		Runner.action.setFont(Runner.f);
-		if (Runner.m.returnProb(1)) {
+			System.out.println(i);
+		if (Runner.m.returnProb(i)) {
 			Runner.action.setBackground(Color.green.brighter());
 			Runner.action.setForeground(Color.green.darker());
 			Runner.action.setText("Action successful!");
@@ -133,5 +137,20 @@ class playListener implements ActionListener {
 			Runner.action.setForeground(Color.red.darker());
 			Runner.action.setText("Action\nfailed!");
 		}
+	}
+}
+	
+class robotListener implements ActionListener {
+	private int i;
+	public robotListener(int i) {
+		this.i = i;
+	}
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		Runner.action.setFont(Runner.f);
+		Runner.m = Runner.robots.get(i);
+		Runner.stats.setSize(Runner.width / 4, Runner.height / 4);
+		Runner.stats.setFont(Runner.p);
+		Runner.stats.setText(Runner.m.returnStats());
 	}
 }
