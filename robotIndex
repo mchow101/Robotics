@@ -1,0 +1,149 @@
+Name: Breakerbots5104
+Dual: True
+Climb: 17
+Launch: True
+Switch: 19
+Scale: 19
+
+Name: Elite1
+Dual: True
+Climb: 18
+Launch: True
+Switch: 19
+Scale: 19
+
+
+Name: Elite2
+Dual: True
+Climb: 17
+Launch: True
+Switch: 19
+Scale: 19
+
+
+Name: Elite3
+Dual: True
+Climb: 17
+Launch: True
+Switch: 19
+Scale: 19
+
+
+Name: Elite4
+Dual: False
+Climb: 18
+Launch: True
+Switch: 18
+Scale: 18
+
+
+Name: Average5
+Dual: True
+Climb: 15
+Launch: True
+Switch: 18
+Scale: 18
+
+Name: Average6
+Dual: True
+Climb: 15
+Launch: True
+Switch: 18
+Scale: 18
+
+
+Name: Average7
+Dual: False
+Climb: 16
+Launch: True
+Switch: 18
+Scale: 18
+
+
+Name: Average8
+Dual: False
+Climb: 16
+Launch: True
+Switch: 18
+Scale: 18
+
+
+Name: Average9
+Dual: False
+Climb: 16
+Launch: True
+Switch: 18
+Scale: 18
+
+
+Name: Average10
+Dual: False
+Climb: 15
+Launch: False
+Switch: 17
+Scale: 17
+
+
+Name: Average11
+Dual: False
+Climb: 15
+Launch: False
+Switch: 17
+Scale: 17
+
+
+Name: Average12
+Dual: False
+Climb: 15
+Launch: False
+Switch: 18
+Scale: 18
+
+Name: Average13
+Dual: False
+Climb: 15
+Launch: False
+Switch: 17
+Scale: 17
+
+
+Name: Rookie14
+Dual: False
+Climb: 14
+Launch: True
+Switch: 16
+Scale: 16
+
+
+Name: Rookie15
+Dual: False
+Climb: 13
+Launch: False
+Switch: 16
+Scale: 16
+
+
+Name: Rookie16
+Dual: False
+Climb: 0
+Launch: False
+Switch: 16
+Scale: 16
+
+
+Name: Rookie17
+Dual: False
+Climb: 0
+Launch: False
+Switch: 15
+Scale: 15
+
+
+Name: Rookie18
+Dual: False
+Climb: 0
+Launch: False
+Switch: 15
+Scale: 15
+
+
