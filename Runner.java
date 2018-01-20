@@ -23,11 +23,13 @@ public class Runner {
 	static JPanel robotPanel = new JPanel();
 	static JTextPane stats = new JTextPane();
 	static JTextPane action = new JTextPane();
+	static Robot m = (new Robot((int) (Math.random() * 10) + 10, (int) (Math.random() * 10) + 10, true, true));
+	static Font f = new Font(Font.SANS_SERIF, 3, 75);
+	static Font z = new Font(Font.SANS_SERIF, 3, 15);
+	static Font p = new Font(Font.SANS_SERIF, 3, 20);
+	static int[] lollipop = new int[8];
 
-	
 	public static void main(String args[]) {
-		Font f = new Font(Font.SANS_SERIF, 3, 75);
-		Font z = new Font(Font.SANS_SERIF, 3, 15);
 
 		window.setLayout(null);
 		window.setVisible(true);
@@ -37,13 +39,14 @@ public class Runner {
 		buttonPanel.setLayout(new GridLayout(4, 2));
 		buttonPanel.setSize(width, height - (height / 2));
 		buttonPanel.setLocation(0, 200);
-		
-		robotPanel.setLayout(new GridLayout(1,6));
-		robotPanel.setSize(width, height - ((height/4)*3));
+
+		robotPanel.setLayout(new GridLayout(1, 6));
+		robotPanel.setSize(width, height - ((height / 4) * 3));
 		robotPanel.setLocation(0, 600);
 
 		stats.setSize(width / 4, height / 4);
-		stats.setText("Stats:");
+		stats.setFont(p);
+		stats.setText(m.returnStats());
 
 		action.setSize((width - (width / 4) - 5), height / 4);
 		action.setLocation((width / 4) + 5, 0);
@@ -53,21 +56,12 @@ public class Runner {
 		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
 		doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
-		action.setFont(f);
-		action.setForeground(Color.green.darker());
-		action.setText("Action successful!");
-
-		window.setSize(width, height);
-		window.add(action);
-		window.add(buttonPanel);
-		window.add(stats);
-		window.add(robotPanel);
-
 		for (int i = 0; i < 8; i++) {
 			actionButtons[i] = new JButton("" + (i + 1));
 			buttonPanel.add(actionButtons[i]);
 			actionButtons[i].addActionListener(new playListener());
 			actionButtons[i].setFont(z);
+			lollipop[i] = i + 1;
 			switch (i) {
 			case 0:
 				actionButtons[i].setText("Place Cube onto Switch");
@@ -94,25 +88,30 @@ public class Runner {
 				actionButtons[i].setText("Dual Climb");
 				break;
 
-			}}
-			
-			for(int i = 0; i < 6; i++){
-				robotButtons[i] = new JButton("Robot" + (i + 1));
-				robotPanel.add(robotButtons[i]);
-				robotButtons[i].addActionListener(new playListener());
-				robotButtons[i].setFont(z);
-				
-				
-				
-				if(i < 3){
-					robotButtons[i].setForeground(Color.red.darker());
-				}else{
-					robotButtons[i].setForeground(Color.blue.darker());
-				}
 			}
-			
+		}
 
-		
+		for (int i = 0; i < 6; i++) {
+			robotButtons[i] = new JButton("Robot" + (i + 1));
+			robotPanel.add(robotButtons[i]);
+			robotButtons[i].addActionListener(new playListener());
+			robotButtons[i].setFont(z);
+
+			if (i < 3) {
+				robotButtons[i].setForeground(Color.red.darker().darker());
+				robotButtons[i].setBackground(Color.red.brighter().brighter());
+			} else {
+				robotButtons[i].setForeground(Color.blue.darker().darker());
+				robotButtons[i].setBackground(Color.blue.brighter().brighter());
+			}
+		}
+
+		window.setSize(width, height);
+		window.add(action);
+		window.add(buttonPanel);
+		window.add(stats);
+		window.add(robotPanel);
+
 		window.setBackground(Color.blue);
 
 	}
@@ -123,5 +122,16 @@ class playListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
+		System.out.println(Runner.lollipop);
+		Runner.action.setFont(Runner.f);
+		if (Runner.m.returnProb(1)) {
+			Runner.action.setBackground(Color.green.brighter());
+			Runner.action.setForeground(Color.green.darker());
+			Runner.action.setText("Action successful!");
+		} else {
+			Runner.action.setBackground(Color.red.brighter());
+			Runner.action.setForeground(Color.red.darker());
+			Runner.action.setText("Action\nfailed!");
+		}
 	}
 }
