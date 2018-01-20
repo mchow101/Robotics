@@ -1,5 +1,5 @@
 public class Robot {
-	
+	private String name;
 	private double cubeOnSwitch;
 	private double cubeOnScale;
 	private double tossOnSwitchClose;
@@ -11,7 +11,8 @@ public class Robot {
 	private boolean launch;
 	private boolean dual;
 	
-	public Robot(int cubeOnSwitch, int singleClimb, boolean launch, boolean dual) {
+	public Robot(String name, int cubeOnSwitch, int singleClimb, boolean launch, boolean dual) {
+		this.name = name;
 		this.cubeOnSwitch = (double)(cubeOnSwitch)/20;
 		this.cubeOnScale = (double) (cubeOnSwitch)/20;
 		this.singleClimb = (double)(singleClimb)/20;
@@ -32,6 +33,10 @@ public class Robot {
 			this.tossOnScaleFar = 0;
 		}
 		this.launch = launch;
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 	public String getCubeOnSwitch() {
@@ -64,6 +69,10 @@ public class Robot {
 	
 	public String getDualClimb() {
 		return (int)(dualClimb*100) + "%";
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public void setCubeOnSwitch(int val) {
@@ -118,8 +127,10 @@ public class Robot {
 	
 	public String returnStats() {
 		String s = "";
-		s += "Climb: ";
-		s += dual ? "dual - " + getDualClimb() : "single - " + getSingleClimb();
+		s += "**" + name + "**";
+		s += "\nClimb: ";
+		s += dual ? "dual - " + getDualClimb() + " single - " + getSingleClimb() : 
+			"single - " + getSingleClimb();
 		s += "\nLaunch: ";
 		s += launch ? "yes" : "no";
 		s += "\nSwitch: " + getCubeOnSwitch() + "\nScale: " + getCubeOnScale();
