@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,11 +22,16 @@ public class Runner {
 	static JPanel panel = new JPanel();
 	static JTextPane stats = new JTextPane();
 	static JTextPane action = new JTextPane();
+	static ArrayList<Robot> robots = new ArrayList<Robot>();
 
 	public static void main(String args[]) {
 		Font f = new Font(Font.SANS_SERIF, 3, 75);
 		Font z = new Font(Font.SANS_SERIF, 3, 15);
-
+		Font p = new Font(Font.SANS_SERIF, 3, 30);
+		
+		Robot m = (new Robot((int)(Math.random()*10) + 10, (int)(Math.random()*10) + 10,
+				true, true));
+		
 		window.setLayout(null);
 		window.setVisible(true);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +42,8 @@ public class Runner {
 		panel.setLocation(0, 200);
 
 		stats.setSize(width / 4, height / 4);
-		stats.setText("Stats:");
+		stats.setFont(p);
+		stats.setText(m.returnStats());
 
 		action.setSize((width - (width / 4) - 5), height / 4);
 		action.setLocation((width / 4) + 5, 0);
@@ -54,7 +61,7 @@ public class Runner {
 		window.add(action);
 		window.add(panel);
 		window.add(stats);
-
+		
 		for (int i = 0; i < 8; i++) {
 			button[i] = new JButton("" + (i + 1));
 			panel.add(button[i]);
