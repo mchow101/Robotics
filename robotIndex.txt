@@ -5,6 +5,7 @@ Launch: True
 Switch: 19
 Scale: 19
 
+
 Name: Elite1
 Dual: True
 Climb: 18
@@ -43,6 +44,7 @@ Climb: 15
 Launch: True
 Switch: 18
 Scale: 18
+
 
 Name: Average6
 Dual: True
